@@ -10,7 +10,7 @@ namespace Check_Repetition_3
         string str = "";
         string[] strings;
         string[] strings2 = { "elder", "ypypy", "dersten", "sikama", "huko", "jode", "boss", "jordan" };
-        string[] strings3;
+        string[] strings3, strings4;
         public Form1() { InitializeComponent(); }
         private void button1_Click(object sender, EventArgs e) { Close(); }
 
@@ -30,6 +30,7 @@ namespace Check_Repetition_3
         { 
             // оновлення
             textBox2.Text = "";
+            textBox5.Text = "";
             j = 0;
             g = 0;
             CheckMethod();
@@ -38,6 +39,7 @@ namespace Check_Repetition_3
         {
             // перетворення введеного списку слів у масив
             strings3 = textBox3.Text.Split(' ');
+            strings4 = textBox4.Text.Split(' ');
             // перевірка на наявність повторення та запис номеру позиції
             for (int i = 0; i < strings3.Length; i++)
             {
@@ -88,6 +90,40 @@ namespace Check_Repetition_3
                     }
                     else
                         textBox2.Text += $", {strings3[i]}";
+                }
+            }
+            //------------------------------
+            j = 0;
+            g = 0;
+            for (int i = 0; i < strings4.Length; i++)
+            {
+                if (j != strings.Length)
+                {
+                    if (i == Convert.ToInt32(strings[j]))
+                    {
+                        j++;
+                        continue;
+                    }
+                    else
+                    {
+                        if (g == 0)
+                        {
+                            g = 1;
+                            textBox5.Text = strings4[i];
+                        }
+                        else
+                            textBox5.Text += $", {strings4[i]}";
+                    }
+                }
+                else
+                {
+                    if (g == 0)
+                    {
+                        g = 1;
+                        textBox5.Text = strings4[i];
+                    }
+                    else
+                        textBox5.Text += $", {strings4[i]}";
                 }
             }
         }
