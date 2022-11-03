@@ -37,38 +37,87 @@ namespace Check_Repetition_3
         }
         public void CheckMethod()
         {
-            // перетворення введеного списку слів у масив
-            strings3 = textBox3.Text.Split(' ');
-            strings4 = textBox4.Text.Split(' ');
-            // перевірка на наявність повторення та запис номеру позиції
-            for (int i = 0; i < strings3.Length; i++)
+            if (textBox3.Text[0] == ' ')
             {
-                for (int f = 0; f < strings2.Length; f++)
+                MessageBox.Show(
+                    "На почту першого поля стоїть пробіл",
+                    "Увага",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Warning);
+                return;
+            }
+            else if (textBox4.Text[0] == ' ')
+            {
+                MessageBox.Show(
+                    "На почту другого поля стоїть пробіл",
+                    "Увага",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Warning);
+                return;
+            }
+            else if (textBox3.Text[textBox3.Text.Length-1] == ' ')
+            {
+                MessageBox.Show(
+                    "В кінці першого поля стоїть пробіл",
+                    "Увага",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Warning);
+                return;
+            }
+            else if (textBox4.Text[textBox4.Text.Length-1] == ' ')
+            {
+                MessageBox.Show(
+                    "В кінці другого поля стоїть пробіл",
+                    "Увага",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Warning);
+                return;
+            }
+            else
+            {
+                // перетворення введеного списку слів у масив
+                strings3 = textBox3.Text.Split(' ');
+                strings4 = textBox4.Text.Split(' ');
+                // перевірка на наявність повторення та запис номеру позиції
+                for (int i = 0; i < strings3.Length; i++)
                 {
-                    if (strings3[i] == strings2[f])
+                    for (int f = 0; f < strings2.Length; f++)
                     {
-                        if (q == 0)
+                        if (strings3[i] == strings2[f])
                         {
-                            // запис номеру позиції у простий рядок
-                            str = i.ToString();
-                            q = 1;
+                            if (q == 0)
+                            {
+                                // запис номеру позиції у простий рядок
+                                str = i.ToString();
+                                q = 1;
+                            }
+                            else
+                                str += $" {i}";
                         }
-                        else
-                            str += $" {i}";
                     }
                 }
-            }
-            // перетворення простого рядка у масив
-            strings = str.Split(' ');
-            // видалення слів які повторюються у списках
-            for (int i = 0; i < strings3.Length; i++)
-            {
-                if (j != strings.Length)
+                // перетворення простого рядка у масив
+                strings = str.Split(' ');
+                // видалення слів які повторюються у списках
+                for (int i = 0; i < strings3.Length; i++)
                 {
-                    if (i == Convert.ToInt32(strings[j]))
+                    if (j != strings.Length)
                     {
-                        j++;
-                        continue;
+                        if (i == Convert.ToInt32(strings[j]))
+                        {
+                            j++;
+                            continue;
+                        }
+                        else
+                        {
+                            if (g == 0)
+                            {
+                                g = 1;
+                                textBox2.Text = strings3[i];
+                            }
+                            else
+                                textBox2.Text += $", {strings3[i]}";
+                        }
                     }
                     else
                     {
@@ -81,28 +130,28 @@ namespace Check_Repetition_3
                             textBox2.Text += $", {strings3[i]}";
                     }
                 }
-                else
+                //------------------------------
+                j = 0;
+                g = 0;
+                for (int i = 0; i < strings4.Length; i++)
                 {
-                    if (g == 0)
+                    if (j != strings.Length)
                     {
-                        g = 1;
-                        textBox2.Text = strings3[i];
-                    }
-                    else
-                        textBox2.Text += $", {strings3[i]}";
-                }
-            }
-            //------------------------------
-            j = 0;
-            g = 0;
-            for (int i = 0; i < strings4.Length; i++)
-            {
-                if (j != strings.Length)
-                {
-                    if (i == Convert.ToInt32(strings[j]))
-                    {
-                        j++;
-                        continue;
+                        if (i == Convert.ToInt32(strings[j]))
+                        {
+                            j++;
+                            continue;
+                        }
+                        else
+                        {
+                            if (g == 0)
+                            {
+                                g = 1;
+                                textBox5.Text = strings4[i];
+                            }
+                            else
+                                textBox5.Text += $", {strings4[i]}";
+                        }
                     }
                     else
                     {
@@ -114,16 +163,6 @@ namespace Check_Repetition_3
                         else
                             textBox5.Text += $", {strings4[i]}";
                     }
-                }
-                else
-                {
-                    if (g == 0)
-                    {
-                        g = 1;
-                        textBox5.Text = strings4[i];
-                    }
-                    else
-                        textBox5.Text += $", {strings4[i]}";
                 }
             }
         }
